@@ -1,0 +1,99 @@
+DOC-FULL-NR — FINAL FIREBASE HOSTING EDITION
+=============================================
+
+IMPORTANT
+---------
+Your Firestore subjects already exist.
+This package DOES NOT automatically seed, delete, or overwrite them.
+
+Firebase Project:
+doc-full-nr
+
+Admin Email:
+pisite.2543nac@gmail.com
+
+Login ID:
+pisit2000
+
+LIVE WEBSITE TARGET:
+https://doc-full-nr.web.app/login
+
+
+FIRST FINAL DEPLOY
+------------------
+1. Extract this ZIP to a NEW folder.
+2. Close old localhost/GitHub Pages terminals.
+3. Double-click:
+   00_FINAL_SETUP_AND_DEPLOY.bat
+4. Wait for:
+   PRODUCTION DEPLOY SUCCESS
+5. The browser opens:
+   https://doc-full-nr.web.app/login
+6. Login using your existing Firebase Authentication password.
+
+The script does NOT delete Firestore documents.
+Deploying Rules/Indexes/Hosting does not erase your existing subjects.
+
+
+LOCAL TEST
+----------
+01_RUN_LOCAL.bat
+
+URL:
+http://localhost:5174/login
+
+
+TEST THE PRODUCTION BUILD BEFORE DEPLOY
+---------------------------------------
+04_TEST_PRODUCTION_BUILD.bat
+
+URL:
+http://localhost:4174/login
+
+
+DEPLOY WEBSITE AGAIN
+--------------------
+02_DEPLOY_WEBSITE_ONLY.bat
+
+
+DEPLOY RULES/INDEXES AGAIN
+--------------------------
+03_DEPLOY_RULES_ONLY.bat
+
+
+GITHUB
+------
+Use GitHub only as the clean source-code repository.
+
+Recommended new repository name:
+doc-full-nr-smart-worksheet
+
+Create an EMPTY GitHub repository, then run:
+06_GITHUB_PUSH_CLEAN_SOURCE.bat
+
+GitHub is NOT required to open the live website.
+Firebase Hosting is the live website.
+
+
+DO NOT UPLOAD / COMMIT
+----------------------
+.env.local
+node_modules
+dist
+Service Account JSON
+Firebase Admin SDK JSON
+Private Key
+Admin password
+
+
+FINAL TEST CHECKLIST
+--------------------
+[ ] https://doc-full-nr.web.app/login opens
+[ ] Admin login works
+[ ] Dashboard opens
+[ ] Existing subjects are still present
+[ ] Add a classroom works
+[ ] Create a worksheet works
+[ ] Publish a worksheet works
+[ ] Logout works
+[ ] Login again works

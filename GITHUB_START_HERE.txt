@@ -1,0 +1,87 @@
+DOC-FULL-NR — FINAL GITHUB SOURCE PACKAGE
+=========================================
+
+GitHub repository:
+https://github.com/pisite2543nac-netizen/doc-full-nr-smart-worksheet.git
+
+Live website:
+https://doc-full-nr.web.app/login
+
+IMPORTANT
+---------
+GitHub is now used for SOURCE CODE / backup / version control.
+The live website remains on Firebase Hosting.
+
+The Firestore database and existing subjects are NOT contained in this ZIP.
+They remain in Firebase project: doc-full-nr.
+
+EASIEST UPLOAD METHOD
+---------------------
+1. Extract this ZIP to a normal folder.
+2. Open the extracted folder.
+3. Double-click:
+   00_PUSH_TO_GITHUB.bat
+4. A list of files to be uploaded will appear.
+5. Confirm that these are NOT listed:
+   .env.local
+   node_modules
+   dist
+   firebase-adminsdk JSON
+   serviceAccountKey.json
+6. Press any key.
+7. Wait for:
+   GITHUB PUSH SUCCESS
+
+The repository URL is already configured in the script.
+
+FUTURE UPDATES
+--------------
+After editing the source code, run:
+
+01_UPDATE_GITHUB.bat
+
+LIVE DEPLOYMENT
+---------------
+GitHub does NOT deploy the live website in this edition.
+
+Deploy the website to Firebase Hosting using:
+
+02_DEPLOY_WEBSITE_ONLY.bat
+
+Full Firebase setup/deploy:
+
+00_LOW_DISK_SETUP_AND_DEPLOY.bat
+
+Live URL:
+
+https://doc-full-nr.web.app/login
+
+FILES INCLUDED
+--------------
+src/
+scripts/
+.github/workflows/build-check.yml
+package.json
+vite.config.js
+index.html
+firebase.json
+firestore.rules
+firestore.indexes.json
+SUBJECTS_1_2569.csv
+.env.example
+.gitignore
+Windows helper scripts
+README / guides
+
+SECURITY
+--------
+Never commit:
+- Admin password
+- .env.local
+- Service Account JSON
+- Private Key
+- node_modules
+- dist
+
+The GitHub workflow only checks that the React/Vite source can build.
+Firebase Hosting remains the production host.

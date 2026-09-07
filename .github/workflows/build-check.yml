@@ -1,0 +1,33 @@
+name: Build Check
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_FIREBASE_API_KEY: build-check-placeholder
+          VITE_FIREBASE_AUTH_DOMAIN: doc-full-nr.firebaseapp.com
+          VITE_FIREBASE_PROJECT_ID: doc-full-nr
+          VITE_FIREBASE_STORAGE_BUCKET: doc-full-nr.appspot.com
+          VITE_FIREBASE_MESSAGING_SENDER_ID: "575211205593"
+          VITE_FIREBASE_APP_ID: "1:575211205593:web:build-check-placeholder"

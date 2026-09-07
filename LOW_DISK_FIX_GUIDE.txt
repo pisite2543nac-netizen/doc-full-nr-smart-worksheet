@@ -1,0 +1,57 @@
+DOC-FULL-NR — ENOSPC / LOW DISK FIX
+===================================
+
+The error:
+
+ENOSPC: no space left on device
+
+means the Windows drive ran out of free disk space while npm was extracting
+node_modules. It is not a Firebase Authentication or Firestore error.
+
+RECOMMENDED FIX
+---------------
+1. Close all old NRTECH / DOC-FULL-NR terminals.
+2. Delete old project copies you no longer need, especially their node_modules folders.
+3. Empty Recycle Bin.
+4. Keep at least 5 GB free.
+5. Prefer using the DATA (D:) drive if it has more free space.
+
+Example destination:
+
+D:\DOC_FULL_NR_FINAL
+
+6. Extract this ZIP there.
+7. Run:
+
+00_LOW_DISK_SETUP_AND_DEPLOY.bat
+
+This version redirects npm TEMP and npm cache into the project folder itself,
+so if the project is on D:, most installation data stays on D: instead of C:.
+
+SAFE TO DELETE FROM OLD COPIES
+------------------------------
+node_modules\
+dist\
+.npm-cache\
+.tmp\
+
+These are generated files and can be recreated.
+
+DO NOT DELETE
+-------------
+src\
+scripts\
+package.json
+firebase.json
+firestore.rules
+firestore.indexes.json
+README.md
+
+FIRESTORE DATA
+--------------
+Deleting local node_modules or moving the project folder does NOT delete data
+from Firebase. Existing subjects in Firestore remain intact.
+
+LIVE WEBSITE AFTER SUCCESS
+--------------------------
+https://doc-full-nr.web.app/login
