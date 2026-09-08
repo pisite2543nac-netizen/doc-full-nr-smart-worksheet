@@ -1,0 +1,19 @@
+DOC-FULL-NR Smart Worksheet V2 - Upload Order
+================================================
+
+If uploading to GitHub in small batches, upload/extract each ZIP into the SAME repository root in this order:
+
+1) 01_ROOT_CONFIG_GITHUB.zip
+2) 02_WEB_CORE.zip
+3) 03_WEB_USER_UI.zip
+4) 04_WEB_ADMIN_UI.zip
+5) 05_CLOUD_FUNCTIONS_CORE.zip
+6) 06_FUNCTIONS_REPORT_PDF_SEED_DOCS.zip
+
+IMPORTANT
+- Do NOT upload node_modules, dist, .env.local, service-account JSON, passwords, *.pem or *.key.
+- GitHub Pages: Settings > Pages > Source = GitHub Actions.
+- The GitHub Pages workflow builds Demo Mode automatically, so the UI opens without Firebase configuration.
+- Firebase Production remains https://doc-full-nr.web.app/ after deployment.
+- Before deploying Functions that use QR/Barcode, run 05_SET_QR_SECRET.bat once.
+- Seed is NOT automatic. It does not overwrite existing subjects/worksheets unless an Admin explicitly calls the seed function with overwrite=true.

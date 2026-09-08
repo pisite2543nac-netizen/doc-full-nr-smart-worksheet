@@ -1,0 +1,32 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() { return request.auth != null; }
+    function userDoc() { return firestore.get(/databases/(default)/documents/users/$(request.auth.uid)); }
+    function active() { return signedIn() && userDoc().data.isActive == true; }
+    function admin() { return active() && userDoc().data.role == 'admin'; }
+    function imageOk() { return request.resource.size < 5 * 1024 * 1024 && request.resource.contentType.matches('image/(jpeg|png)'); }
+
+    match /profiles/{uid}/{fileName} {
+      allow read: if active();
+      allow write: if active() && request.auth.uid == uid && imageOk();
+    }
+    match /worksheet-files/{worksheetId}/{fileName} {
+      allow read: if active();
+      allow write: if admin() && request.resource.size < 20 * 1024 * 1024;
+    }
+    match /submission-files/{uid}/{submissionId}/{fileName} {
+      allow read: if admin() || (active() && request.auth.uid == uid);
+      allow create: if active() && request.auth.uid == uid && request.resource.size < 20 * 1024 * 1024;
+      allow update, delete: if false;
+    }
+    match /generated-pdf/{worksheetId}/{fileName} {
+      allow read, write: if admin();
+    }
+    match /user-paper/{uid}/{worksheetId}/{fileName} {
+      allow read: if active() && request.auth.uid == uid;
+      allow write: if false;
+    }
+    match /{allPaths=**} { allow read, write: if false; }
+  }
+}
