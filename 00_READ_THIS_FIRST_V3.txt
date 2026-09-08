@@ -1,0 +1,31 @@
+DOC-FULL-NR V3 REPAIR
+=====================
+
+The current GitHub error:
+  [vite:build-html] Failed to resolve /src/main.tsx from .../index.html
+
+means GitHub is building from an obsolete/flattened root web structure instead of apps/web.
+
+FASTEST AND SAFEST FIX
+1) Do NOT upload the project file-by-file from inside a ZIP window.
+2) Keep the existing local Git clone at:
+     D:\DOC_FULL_NR_GITHUB_FINAL_SOURCE
+3) Extract this ZIP normally to a folder.
+4) Double-click:
+     00_REPAIR_GITHUB_STRUCTURE_AND_PUSH.bat
+5) The script removes legacy root Vite files, copies the V3 monorepo with folders intact,
+   builds locally, commits, and pushes only after the build passes.
+6) In GitHub Actions, ignore old failed runs. Watch only the newest commit.
+
+Expected final repository layout:
+  .github/workflows/
+  apps/web/index.html
+  apps/web/src/main.tsx
+  functions/src/index.ts
+  package.json
+  firebase.json
+  firestore.rules
+  storage.rules
+
+GitHub Pages URL:
+  https://pisite2543nac-netizen.github.io/doc-full-nr-smart-worksheet/

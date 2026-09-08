@@ -73,3 +73,6 @@ npm run deploy:web
 - Cloud Functions source is syntax-transpiled to `functions/lib` for deploy packaging; use `npm --workspace functions run typecheck` separately before production hardening.
 - `06_CONNECT_FIREBASE_TO_GITHUB.bat` reads the official Firebase Web SDK config from project `doc-full-nr`, writes `apps/web/src/generated/firebaseConfig.ts`, commits it, and pushes to `main`.
 - If the generated API key is empty, the UI automatically runs in Demo Mode instead of rendering a blank page.
+
+## V3 structure repair
+If GitHub Actions reports `Failed to resolve /src/main.tsx from .../index.html`, the repository contains an obsolete or flattened root Vite app. Use `00_REPAIR_GITHUB_STRUCTURE_AND_PUSH.bat` from the V3 repair bundle. The GitHub workflows now build with `working-directory: apps/web`, so root-level legacy files cannot hijack the web build.
