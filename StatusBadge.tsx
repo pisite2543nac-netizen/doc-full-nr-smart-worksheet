@@ -1,0 +1,2 @@
+import { Badge } from './ui';
+export function StatusBadge({status}:{status:string}){const map:Record<string,[string,'slate'|'blue'|'green'|'orange'|'red'|'purple']>={draft:['Draft','slate'],published:['Published','blue'],not_started:['ยังไม่เริ่ม','slate'],in_progress:['กำลังทำ','orange'],submitted:['ส่งแล้ว','green'],late:['ส่งช้า','orange'],expired:['หมดเวลา','red'],pending_review:['รอตรวจ','purple'],reviewed:['ตรวจแล้ว','green'],closed:['ปิดใบงาน','slate']};const [label,tone]=map[status]??[status,'slate'];return <Badge tone={tone}>{label}</Badge>}

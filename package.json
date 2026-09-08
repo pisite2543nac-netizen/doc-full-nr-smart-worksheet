@@ -1,18 +1,31 @@
 {
-  "name": "doc-full-nr-smart-worksheet",
+  "name": "@doc-full-nr/web",
   "private": true,
   "version": "2.0.0",
-  "workspaces": ["apps/web", "functions"],
+  "type": "module",
   "scripts": {
-    "dev": "npm --workspace apps/web run dev",
-    "build": "npm --workspace apps/web run build && npm --workspace functions run build",
-    "typecheck": "npm --workspace apps/web run typecheck && npm --workspace functions run typecheck",
-    "test": "npm --workspace apps/web run test && npm --workspace functions run test",
-    "lint": "npm --workspace apps/web run lint && npm --workspace functions run lint",
-    "deploy:web": "npm --workspace apps/web run build && firebase deploy --only hosting",
-    "deploy:rules": "firebase deploy --only firestore:rules,firestore:indexes,storage",
-    "deploy:functions": "npm --workspace functions run build && firebase deploy --only functions",
-    "deploy:all": "npm run build && firebase deploy"
+    "dev": "vite --port 5174 --strictPort",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "node ./scripts/smoke-test.mjs",
+    "preview": "vite preview --port 4174 --strictPort"
   },
-  "engines": {"node": ">=20"}
+  "dependencies": {
+    "firebase": "^12.2.1",
+    "lucide-react": "^0.542.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.4"
+  }
 }
