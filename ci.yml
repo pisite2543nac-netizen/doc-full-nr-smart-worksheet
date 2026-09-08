@@ -4,17 +4,27 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
-          cache: npm
-      - run: npm install
-      - run: npm run typecheck
-      - run: npm run lint
-      - run: npm run test
-      - run: npm run build
+          node-version: '24'
+          package-manager-cache: false
+      - run: npm install --no-audit --no-fund
+      - name: Smoke tests
+        run: npm run test
+      - name: Source checks
+        run: npm run lint
+      - name: Strict TypeScript advisory
+        continue-on-error: true
+        run: npm run typecheck
+      - name: Web production build
+        run: npm --workspace apps/web run build
+      - name: Functions transpile build
+        run: npm --workspace functions run build

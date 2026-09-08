@@ -1,3 +1,9 @@
-import { onCall,HttpsError } from 'firebase-functions/v2/https';import { db,FieldValue,Timestamp } from '../shared/firebase';import { requireAdmin } from '../shared/auth';import { audit } from '../shared/audit';const region='asia-southeast1';
-export const createSubmissionOverride=onCall({region},async req=>{const a=await requireAdmin(req);const {worksheetId,userId,reason,validUntil}=req.data as any;if(!worksheetId||!userId||!reason||!validUntil)throw new HttpsError('invalid-argument','ข้อมูลไม่ครบ');const ref=db.collection('submissionOverrides').doc();await ref.set({worksheetId,userId,reason,validUntil:Timestamp.fromDate(new Date(validUntil)),active:true,allowedBy:a.uid,allowedAt:FieldValue.serverTimestamp()});await audit(a,'CREATE_OVERRIDE','submissionOverride',ref.id,{worksheetId,userId});return {id:ref.id};});
-export const revokeSubmissionOverride=onCall({region},async req=>{const a=await requireAdmin(req);const {id}=req.data as any;await db.doc(`submissionOverrides/${id}`).update({active:false,revokedBy:a.uid,revokedAt:FieldValue.serverTimestamp()});await audit(a,'REVOKE_OVERRIDE','submissionOverride',id);return {ok:true};});
+export { createUser,setUserRole } from './users';
+export { createWorksheet,updateWorksheet,publishWorksheet } from './worksheets';
+export { saveWorksheetDraft,submitDigitalWorksheet,confirmPaperSubmission } from './submissions';
+export { gradeSubmission,autoGradeWorksheet } from './grades';
+export { createSubmissionOverride,revokeSubmissionOverride } from './overrides';
+export { exportReport } from './reports';
+export { generatePaperWorksheetPdf,generateMyPaperWorksheetPdf } from './pdf';
+export { seedInitialSubjectsAndWorksheets } from './seed';
+export { getServerTime } from './shared/serverTime';

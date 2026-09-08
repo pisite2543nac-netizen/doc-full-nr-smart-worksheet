@@ -1,0 +1,20 @@
+{
+  "name": "doc-full-nr-smart-worksheet",
+  "private": true,
+  "version": "2.1.0",
+  "workspaces": ["apps/web", "functions"],
+  "scripts": {
+    "dev": "npm --workspace apps/web run dev",
+    "build": "npm run build:web && npm run build:functions",
+    "build:web": "npm --workspace apps/web run build",
+    "build:functions": "npm --workspace functions run build",
+    "typecheck": "npm --workspace apps/web run typecheck && npm --workspace functions run typecheck",
+    "test": "npm --workspace apps/web run test && npm --workspace functions run test",
+    "lint": "npm --workspace apps/web run lint && npm --workspace functions run lint",
+    "deploy:web": "npm --workspace apps/web run build && firebase deploy --only hosting",
+    "deploy:rules": "firebase deploy --only firestore:rules,firestore:indexes,storage",
+    "deploy:functions": "npm --workspace functions run build && firebase deploy --only functions",
+    "deploy:all": "npm run build && firebase deploy"
+  },
+  "engines": {"node": ">=22"}
+}

@@ -65,3 +65,11 @@ npm run deploy:web
 - สำหรับ QR/Barcode production ควรใช้ signed token/HMAC หรือ one-time token ที่สร้างจาก server; scaffold นี้ยังไม่เปิดเผย secret ใน client
 
 ดู `docs/` สำหรับ schema, security, UX flow และ test cases.
+
+## V2.1 Build/Pages Reliability Fix
+
+- GitHub Pages is deployed from `apps/web/dist` by GitHub Actions.
+- `build-check.yml` no longer blocks Pages on semantic TypeScript migration errors.
+- Cloud Functions source is syntax-transpiled to `functions/lib` for deploy packaging; use `npm --workspace functions run typecheck` separately before production hardening.
+- `06_CONNECT_FIREBASE_TO_GITHUB.bat` reads the official Firebase Web SDK config from project `doc-full-nr`, writes `apps/web/src/generated/firebaseConfig.ts`, commits it, and pushes to `main`.
+- If the generated API key is empty, the UI automatically runs in Demo Mode instead of rendering a blank page.

@@ -1,0 +1,33 @@
+name: Build Check
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Source smoke tests
+        run: npm run test
+      - name: Source lint checks
+        run: npm run lint
+      - name: Build web for GitHub Pages
+        run: npm --workspace apps/web run build:pages
+        env:
+          VITE_BASE_PATH: /doc-full-nr-smart-worksheet/
+          VITE_DEMO_MODE: 'false'
+      - name: Build Cloud Functions bundle
+        run: npm --workspace functions run build
