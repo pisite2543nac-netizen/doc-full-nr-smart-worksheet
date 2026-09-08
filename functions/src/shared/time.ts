@@ -1,0 +1,1 @@
+import { Timestamp } from './firebase';export function nowMs(){return Date.now()}export function toMs(v:any){if(!v)return undefined;if(v instanceof Timestamp)return v.toMillis();if(typeof v.toMillis==='function')return v.toMillis();if(typeof v==='string')return new Date(v).getTime();if(v instanceof Date)return v.getTime();return undefined;}

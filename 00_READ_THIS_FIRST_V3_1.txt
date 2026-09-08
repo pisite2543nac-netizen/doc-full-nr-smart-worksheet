@@ -1,0 +1,9 @@
+DOC-FULL-NR V3.1 REPAIR
+
+1) Extract this ZIP to a normal folder first. Do NOT run the BAT from inside the ZIP.
+2) Keep the existing Git clone at D:\DOC_FULL_NR_GITHUB_FINAL_SOURCE.
+3) Double-click 00_REPAIR_GITHUB_STRUCTURE_AND_PUSH.bat.
+4) The script will repair the monorepo structure, build locally, commit, and push only if build succeeds.
+5) Ignore old red GitHub Actions runs. Watch only the newest commit.
+
+V3.1 fixes Robocopy exit code 16 handling and detects if the ZIP was not extracted.

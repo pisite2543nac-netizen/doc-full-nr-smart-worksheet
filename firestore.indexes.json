@@ -5,15 +5,25 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "assignedUserIds",
-          "arrayConfig": "CONTAINS"
-        },
-        {
-          "fieldPath": "publishedStatus",
+          "fieldPath": "status",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "deadline",
+          "fieldPath": "dueAt",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "submissions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "worksheetId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "submittedAt",
           "order": "DESCENDING"
         }
       ]
@@ -27,8 +37,68 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "updatedAt",
+          "fieldPath": "submittedAt",
           "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "auditLogs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "action",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "worksheets",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "targetUserIds",
+          "arrayConfig": "CONTAINS"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "worksheets",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "targetClassroomIds",
+          "arrayConfig": "CONTAINS"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "submissionOverrides",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "worksheetId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "active",
+          "order": "ASCENDING"
         }
       ]
     }

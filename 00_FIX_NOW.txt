@@ -1,0 +1,29 @@
+DOC-FULL-NR V2 - FIX ALL PACKAGE
+================================
+
+สิ่งที่แพ็กเกจนี้แก้:
+1) แก้ Build Check ที่ล้มด้วย exit code 2
+2) ไม่ให้ GitHub Pages เอา Source TSX ดิบไปเปิด
+3) Build apps/web/dist ผ่าน GitHub Actions แล้ว Deploy Pages
+4) เขียนทับ workflow เก่า build-check.yml
+5) อัปเดต GitHub Actions เป็น Node 24 action runtime รุ่นใหม่
+6) เตรียม Firebase Web Config แบบ Demo fallback -> Real Firebase อัตโนมัติเมื่อ sync config แล้ว
+7) เตรียม Cloud Functions build ที่สร้าง lib/ ได้โดยไม่ติด semantic TypeScript error ระหว่างช่วง migration
+8) Functions runtime ใช้ Node.js 22
+
+ขั้นตอน:
+A. แตก ZIP
+B. Copy ไฟล์ทั้งหมดด้านในไปไว้ที่ ROOT ของ repo เดิม แล้ว Replace
+C. อัปโหลด/Push ทั้งหมดขึ้น branch main
+D. GitHub > Settings > Pages > Source = GitHub Actions
+E. รอ Actions ล่าสุด: Build Check + CI + Deploy GitHub Pages = สีเขียว
+F. เปิด https://pisite2543nac-netizen.github.io/doc-full-nr-smart-worksheet/
+   - ถ้ายังไม่ได้ sync Firebase จะเข้า Demo UX/UI ได้
+G. เมื่อต้องการเชื่อม Firebase จริง ให้รัน 06_CONNECT_FIREBASE_TO_GITHUB.bat หนึ่งครั้ง
+H. Firebase Console > Authentication > Settings > Authorized domains
+   เพิ่ม pisite2543nac-netizen.github.io
+
+สำคัญ:
+- ไม่ต้องแก้ workflow สีแดงเก่า ให้ดูเฉพาะรอบล่าสุดหลังอัปแพ็กเกจนี้
+- Cloud Functions จริงต้องใช้ Firebase Blaze plan ก่อน deploy
+- อย่าอัป Service Account JSON, private key, password

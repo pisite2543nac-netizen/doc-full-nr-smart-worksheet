@@ -1,5 +1,3 @@
 {
-  "projects": {
-    "default": "doc-full-nr"
-  }
+  "projects": {"default": "doc-full-nr"}
 }
