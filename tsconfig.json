@@ -1,10 +1,1 @@
-{
-  "compilerOptions": {
-    "target": "ES2022", "useDefineForClassFields": true, "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "allowJs": false, "skipLibCheck": true, "esModuleInterop": true, "allowSyntheticDefaultImports": true,
-    "strict": true, "forceConsistentCasingInFileNames": true, "module": "ESNext", "moduleResolution": "Bundler",
-    "resolveJsonModule": true, "isolatedModules": true, "noEmit": true, "jsx": "react-jsx"
-  },
-  "include": ["src"],
-  "references": []
-}
+{"compilerOptions":{"module":"commonjs","target":"ES2022","outDir":"lib","rootDir":"src","strict":true,"esModuleInterop":true,"skipLibCheck":true,"sourceMap":true},"include":["src"]}

@@ -1,0 +1,1 @@
+import { db,FieldValue } from './firebase';export async function audit(actor:{uid:string;role:string},action:string,entityType:string,entityId:string,detail:unknown={}){await db.collection('auditLogs').add({actorUid:actor.uid,actorRole:actor.role,action,entityType,entityId,detail,createdAt:FieldValue.serverTimestamp()});}
