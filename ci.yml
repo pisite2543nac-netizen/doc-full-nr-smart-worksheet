@@ -1,4 +1,5 @@
 name: CI
+
 on:
   push:
     branches: [main]
@@ -16,15 +17,58 @@ jobs:
         with:
           node-version: '24'
           package-manager-cache: false
-      - run: npm install --no-audit --no-fund
-      - name: Smoke tests
+
+      - name: Verify monorepo structure
+        shell: bash
+        run: |
+          set -e
+          test -d apps/web/src
+          test -f apps/web/src/main.tsx
+          test -f apps/web/index.html
+          test -d functions/src
+          test -f functions/src/index.ts
+
+      - name: Install web dependencies
+        working-directory: apps/web
+        run: npm install --no-audit --no-fund
+
+      - name: Test web
+        working-directory: apps/web
         run: npm run test
-      - name: Source checks
+
+      - name: Lint web
+        working-directory: apps/web
         run: npm run lint
-      - name: Strict TypeScript advisory
+
+      - name: TypeScript web advisory
         continue-on-error: true
+        working-directory: apps/web
         run: npm run typecheck
-      - name: Web production build
-        run: npm --workspace apps/web run build
-      - name: Functions transpile build
-        run: npm --workspace functions run build
+
+      - name: Build web
+        working-directory: apps/web
+        run: npm run build
+        env:
+          VITE_DEMO_MODE: 'true'
+          VITE_BASE_PATH: /doc-full-nr-smart-worksheet/
+
+      - name: Install Functions dependencies
+        working-directory: functions
+        run: npm install --no-audit --no-fund
+
+      - name: Test Functions
+        working-directory: functions
+        run: npm run test
+
+      - name: Lint Functions
+        working-directory: functions
+        run: npm run lint
+
+      - name: TypeScript Functions advisory
+        continue-on-error: true
+        working-directory: functions
+        run: npm run typecheck
+
+      - name: Build Functions
+        working-directory: functions
+        run: npm run build

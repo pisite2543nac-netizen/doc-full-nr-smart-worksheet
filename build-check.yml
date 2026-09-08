@@ -1,4 +1,5 @@
 name: Build Check
+
 on:
   push:
     branches: [main]
@@ -13,21 +14,55 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
           node-version: '24'
           package-manager-cache: false
-      - name: Install dependencies
+
+      - name: Verify repository structure
+        shell: bash
+        run: |
+          set -e
+          test -f apps/web/package.json
+          test -f apps/web/index.html
+          test -f apps/web/src/main.tsx
+          test -f functions/package.json
+          test -f functions/src/index.ts
+          echo "Repository structure OK"
+
+      - name: Install web dependencies
+        working-directory: apps/web
         run: npm install --no-audit --no-fund
-      - name: Source smoke tests
+
+      - name: Web smoke test
+        working-directory: apps/web
         run: npm run test
-      - name: Source lint checks
+
+      - name: Web source check
+        working-directory: apps/web
         run: npm run lint
-      - name: Build web for GitHub Pages
-        run: npm --workspace apps/web run build:pages
+
+      - name: Build web
+        working-directory: apps/web
+        run: npm run build
         env:
           VITE_BASE_PATH: /doc-full-nr-smart-worksheet/
-          VITE_DEMO_MODE: 'false'
-      - name: Build Cloud Functions bundle
-        run: npm --workspace functions run build
+          VITE_DEMO_MODE: 'true'
+
+      - name: Install Functions dependencies
+        working-directory: functions
+        run: npm install --no-audit --no-fund
+
+      - name: Functions smoke test
+        working-directory: functions
+        run: npm run test
+
+      - name: Functions source check
+        working-directory: functions
+        run: npm run lint
+
+      - name: Build Functions
+        working-directory: functions
+        run: npm run build
