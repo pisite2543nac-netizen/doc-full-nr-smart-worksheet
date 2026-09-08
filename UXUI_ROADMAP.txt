@@ -1,0 +1,37 @@
+DOC-FULL-NR UX/UI READY ROADMAP
+===============================
+
+พร้อมใช้งานจริงแล้ว
+- Login / Authentication
+- Dashboard
+- System Settings
+- Users (อ่านข้อมูล)
+- Subjects
+- Classrooms
+- Worksheets + Draft/Publish/Close
+- Firebase Hosting
+- Firestore Rules / Indexes
+- GitHub Source Backup
+
+UX/UI เตรียมเมนูไว้แล้ว (เชื่อมฟังก์ชันภายหลัง)
+- มอบหมายงาน
+- งานที่ส่ง
+- ตรวจ / ให้คะแนน
+- QR / Barcode
+- รายงาน
+- ประวัติระบบ / Audit
+
+ลำดับพัฒนาที่เร็วและปลอดภัยที่สุด
+1. Users roles: admin / teacher / student
+2. Assignment data model
+3. Submission workflow
+4. Cloud Functions สำหรับ submissions/grades
+5. Grading / Rubric
+6. QR / Barcode
+7. Reports / Export
+8. Audit Log + Production hardening
+
+หมายเหตุ
+- ห้ามเก็บรหัสผ่านใน Firestore หรือ GitHub
+- submissions, submissionGrades, submissionOverrides, auditLogs ควรให้ Server/Cloud Functions เขียน
+- รายวิชาเดิมใน Firestore ไม่ถูก Seed หรือเขียนทับโดยชุดนี้

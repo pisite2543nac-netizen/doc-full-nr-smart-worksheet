@@ -1,8 +1,4 @@
-import {
-  Navigate,
-  Route,
-  Routes
-} from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./lib/useAuth";
 
 import SetupPage from "./pages/SetupPage";
@@ -13,41 +9,27 @@ import UsersPage from "./pages/UsersPage";
 import SubjectsPage from "./pages/SubjectsPage";
 import ClassroomsPage from "./pages/ClassroomsPage";
 import WorksheetsPage from "./pages/WorksheetsPage";
+import ComingSoonPage from "./pages/ComingSoonPage";
 import AdminLayout from "./components/AdminLayout";
 
 function Protected({ children }) {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return (
-      <div className="page-center">
-        กำลังตรวจสอบบัญชี...
-      </div>
-    );
+    return <div className="page-center"><div className="loading-card">กำลังตรวจสอบบัญชี...</div></div>;
   }
 
-  return user
-    ? children
-    : <Navigate to="/login" replace />;
+  return user ? children : <Navigate to="/login" replace />;
 }
 
 function HomeRedirect() {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return (
-      <div className="page-center">
-        กำลังเปิดระบบ...
-      </div>
-    );
+    return <div className="page-center"><div className="loading-card">กำลังเปิดระบบ...</div></div>;
   }
 
-  return (
-    <Navigate
-      to={user ? "/admin" : "/login"}
-      replace
-    />
-  );
+  return <Navigate to={user ? "/admin" : "/login"} replace />;
 }
 
 export default function App() {
@@ -71,6 +53,12 @@ export default function App() {
         <Route path="subjects" element={<SubjectsPage />} />
         <Route path="classrooms" element={<ClassroomsPage />} />
         <Route path="worksheets" element={<WorksheetsPage />} />
+        <Route path="assignments" element={<ComingSoonPage module="assignments" />} />
+        <Route path="submissions" element={<ComingSoonPage module="submissions" />} />
+        <Route path="grading" element={<ComingSoonPage module="grading" />} />
+        <Route path="qr" element={<ComingSoonPage module="qr" />} />
+        <Route path="reports" element={<ComingSoonPage module="reports" />} />
+        <Route path="audit" element={<ComingSoonPage module="audit" />} />
       </Route>
 
       <Route path="*" element={<HomeRedirect />} />

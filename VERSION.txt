@@ -1,0 +1,5 @@
+DOC-FULL-NR Smart Worksheet
+UX/UI Ready + GitHub Pages Gateway Edition
+Version 8.0.0
+Target Firebase Project: doc-full-nr
+Production Hosting: https://doc-full-nr.web.app

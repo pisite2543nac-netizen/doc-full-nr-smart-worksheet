@@ -96,3 +96,17 @@ The production website is **not served by GitHub Pages**. The live application i
 `https://doc-full-nr.web.app/login`
 
 Use `00_PUSH_TO_GITHUB.bat` for the first push and `01_UPDATE_GITHUB.bat` for later source updates.
+
+## UX/UI Ready Edition
+ชุดนี้เพิ่มโครง UX/UI สำหรับเมนูอนาคตโดยไม่แตะข้อมูลเดิมใน Firestore:
+- มอบหมายงาน
+- งานที่ส่ง
+- ตรวจ / ให้คะแนน
+- QR / Barcode
+- รายงาน
+- ประวัติระบบ
+
+เมนูอนาคตเป็น Placeholder UI เพื่อให้วางโครงหน้าจอและ Navigation ให้เสร็จก่อน แล้วค่อยเชื่อม Firestore/Cloud Functions ทีละโมดูล
+
+## GitHub Pages
+โฟลเดอร์ `docs/` เป็นหน้า Gateway สำหรับ GitHub Pages และจะพาไปเว็บ Production ที่ Firebase Hosting โดยอัตโนมัติ ดู `GITHUB_PAGES_SETUP.txt`
